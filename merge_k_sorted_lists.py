@@ -1,3 +1,5 @@
+import heapq as hq
+
 class ListNode:
     """
     Class for nodes in linked list, which is I/O for mergeKLists().
@@ -30,6 +32,35 @@ def mergeKLists(lists):
         curr.next = ListNode(val)
         curr = curr.next
         
+    return head.next
+
+
+def mergeKLists(lists):
+    """
+    Sort a list of linked list by using a min heap of max size of k. This utilizes the property that each linked
+    list is sorted.
+    
+    Complexity analysis:
+    Time: O(n logk)
+    Space: O(n), auxillary space is O(k), output is O(n)
+    """
+    # store the head of each linked list in heap
+    ctr = 0
+    heap = []
+    for list in lists:
+        hq.heappush(heap, (list.val, ctr, list))
+        ctr += 1
+    
+    head = curr = ListNode(0)
+    while heap:
+        min_val, _, node = hq.heappop(heap)
+        curr.next = ListNode(min_val)
+        curr = curr.next
+        ctr += 1
+        if node.next:
+            node = node.next
+            hq.heappush(heap, (node.val, ctr, node))
+    
     return head.next
 
 

@@ -1,0 +1,2 @@
+def mergeKLists(lists):
+    pass

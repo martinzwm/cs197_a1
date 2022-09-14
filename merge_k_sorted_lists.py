@@ -1,18 +1,25 @@
+"""
+This file contains 2 approaches to merge k sorted linked list
+and return a single sorted and merge linked list.
+"""
 import heapq as hq
+
 
 class ListNode:
     """
-    Class for nodes in linked list, which is I/O for mergeKLists().
+    Class for nodes in linked list, which is I/O for merge_k_lists().
     """
     def __init__(self, val, next=None):
         self.val = val
         self.next = next
 
 
-def mergeKLists(lists):
+def merge_k_lists(lists):
     """
-    Sort a list of linked list by storing their values in a array, sort the array and reconstruct a sorted linked list.
-    Note this may not be the best implementation b/c we didn't use the property that each linked list in the input is sorted.
+    Sort a list of linked list by storing their values in a array, sort the
+    array and reconstruct a sorted linked list.
+    Note this may not be the best implementation b/c we didn't use the
+    property that each linked list in the input is sorted.
     
     Complexity analysis: n = total number nodes, k = number of linked list
     Time: O(n logn)
@@ -35,9 +42,10 @@ def mergeKLists(lists):
     return head.next
 
 
-def mergeKLists(lists):
+def merge_k_lists_h(lists):
     """
-    Sort a list of linked list by using a min heap of max size of k. This utilizes the property that each linked
+    Sort a list of linked list by using a min heap of max size of k. This
+    utilizes the property that each linked
     list is sorted.
     
     Complexity analysis:
@@ -47,8 +55,8 @@ def mergeKLists(lists):
     # store the head of each linked list in heap
     ctr = 0
     heap = []
-    for list in lists:
-        hq.heappush(heap, (list.val, ctr, list))
+    for node in lists:
+        hq.heappush(heap, (node.val, ctr, node))
         ctr += 1
     
     head = curr = ListNode(0)
@@ -64,9 +72,10 @@ def mergeKLists(lists):
     return head.next
 
 
-def createKLists(arrays):
+def create_k_lists(arrays):
     """
-    Utility function to create lists of linked list from list of arrays, used for creating input for mergeKLists().
+    Utility function to create lists of linked list from list of arrays, used
+    for creating input for merge_k_lists().
     """
     lists = []
     for array in arrays:
@@ -77,13 +86,13 @@ def createKLists(arrays):
         lists.append(head.next)
     return lists
 
-
-def readList(list):
+def read_list(node):
     """
-    Utitlity function to create array from a linked list, used for testing the output of mergeKLists().
+    Utitlity function to create array from a linked list, used for testing the
+    output of merge_k_lists().
     """
     nums = []
-    curr = list
+    curr = node
     while curr:
         nums.append(curr.val)
         curr = curr.next
@@ -92,17 +101,15 @@ def readList(list):
 
 def test(arrays):
     """
-    Utitlity function to test the correctness of mergeKLists().
+    Utitlity function to test the correctness of merge_k_lists().
     """
-    lists = createKLists(arrays)
-    list = mergeKLists(lists)
-    array = readList(list)
+    lists = create_k_lists(arrays)
+    sorted_list = merge_k_lists(lists)
+    array = read_list(sorted_list)
     return array
 
 
 if __name__ == "__main__":
-    """
-    Contain test cases for mergeKLists().
-    """
-    arrays = [[1,4,5],[1,3,4],[2,6]]
-    print(test(arrays))
+    test_case1 = [[1, 4, 5], [1, 3, 4], [2, 6]]
+    print(test(test_case1))
+    

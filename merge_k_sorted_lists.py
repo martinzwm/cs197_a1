@@ -31,3 +31,12 @@ def createKLists(arrays):
             curr = curr.next
         lists.append(head)
     return lists
+
+
+def readList(list):
+    nums = []
+    curr = list
+    while curr:
+        nums.append(curr.val)
+        curr = curr.next
+    return nums

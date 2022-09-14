@@ -40,3 +40,14 @@ def readList(list):
         nums.append(curr.val)
         curr = curr.next
     return nums
+
+
+def test(arrays):
+    lists = createKLists(arrays)
+    list = mergeKLists(lists)
+    array = readList(list)
+    return array
+
+if __name__ == "__main__":
+    arrays = [[1,4,5],[1,3,4],[2,6]]
+    print(test(arrays))

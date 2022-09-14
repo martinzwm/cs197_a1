@@ -11,6 +11,10 @@ def mergeKLists(lists):
     """
     Sort a list of linked list by storing their values in a array, sort the array and reconstruct a sorted linked list.
     Note this may not be the best implementation b/c we didn't use the property that each linked list in the input is sorted.
+    
+    Complexity analysis: n = total number nodes, k = number of linked list
+    Time: O(n logn)
+    Space: O(n)
     """
     # stores the values of the nodes in a list
     node_vals = []

@@ -74,7 +74,7 @@ def createKLists(arrays):
         for num in array:
             curr.next = ListNode(num)
             curr = curr.next
-        lists.append(head)
+        lists.append(head.next)
     return lists
 
 

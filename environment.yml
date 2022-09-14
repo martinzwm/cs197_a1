@@ -1,0 +1,6 @@
+name: cs197a1
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+prefix: /Users/martinma/miniconda3/envs/cs197a1

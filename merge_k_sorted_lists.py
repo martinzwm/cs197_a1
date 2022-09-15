@@ -56,9 +56,10 @@ def merge_k_lists_h(lists):
     ctr = 0
     heap = []
     for node in lists:
-        hq.heappush(heap, (node.val, ctr, node))
-        ctr += 1
-    
+        if node is not None:
+            hq.heappush(heap, (node.val, ctr, node))
+            ctr += 1
+
     head = curr = ListNode(0)
     while heap:
         min_val, _, node = hq.heappop(heap)

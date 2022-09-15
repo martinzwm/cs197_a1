@@ -72,6 +72,52 @@ def merge_k_lists_h(lists):
     return head.next
 
 
+def merge_k_lists_r(lists):
+    """
+    Sort a list of linked list by recursively sorting a subset number
+    of linked list, similarly to merge sort.
+    
+    Complexity analysis:
+    Time: O(n logk)
+    Space: O(1), auxillary space is O(1), output is O(n)
+    """
+    # base case
+    if len(lists) == 0:
+        return None
+    if len(lists) == 1:
+        return lists[0]
+    
+    # recursive case
+    partition = len(lists) // 2
+    left_list = merge_k_lists_r(lists[:partition])
+    right_list = merge_k_lists_r(lists[partition:])
+    return merge(left_list, right_list)
+
+
+def merge(left_node, right_node):
+    """
+    Utility function for merge_k_list_r(). Merge 2 sorted linked lists.
+    Return a sorted linked list.
+    """
+    head = curr = ListNode(0)
+    # iterate through 2 linked lists and add the smaller value to sorted linked list
+    while left_node and right_node:
+        if left_node.val < right_node.val:
+            curr.next = left_node
+            left_node = left_node.next
+        else:
+            curr.next = right_node
+            right_node = right_node.next
+        curr = curr.next
+    
+    # add the leftover nodes
+    if left_node:
+        curr.next = left_node
+    else:
+        curr.next = right_node
+    return head.next
+
+
 def create_k_lists(arrays):
     """
     Utility function to create lists of linked list from list of arrays, used
@@ -104,7 +150,7 @@ def test(arrays):
     Utitlity function to test the correctness of merge_k_lists().
     """
     lists = create_k_lists(arrays)
-    sorted_list = merge_k_lists(lists)
+    sorted_list = merge_k_lists_r(lists)
     array = read_list(sorted_list)
     return array
 
